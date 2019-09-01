@@ -72,6 +72,8 @@ def tinyMazeSearch(problem):
     w = Directions.WEST
     return  [s, s, w, s, w, w, s, w]
 
+pathx = []
+
 def depthFirstSearch(problem):
     """
     Search the deepest nodes in the search tree first.
@@ -87,7 +89,51 @@ def depthFirstSearch(problem):
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    
+    print "Start:", problem.getStartState()
+    print "Is the start a goal?", problem.isGoalState(problem.getStartState())
+    print "Start's successors:", problem.getSuccessors(problem.getStartState())
+    currentState = problem.getStartState()
+    nextState = None
+     
+    s = Stack()
+    s.push(currentState)
+
+    while s.IsEmpty() == False:
+        state = s.top()
+       #TODO - coz i have to do work that pays the bills
+       #Add a matrix to check for visited spots
+       #Print actions
+        for x in problem.getSuccessors(state):
+            s.push(x)
+            state = x
+        
+        if problem.IsGoalState(s.top()) == True:
+            #time to unwind
+            tempList = []
+            while s.IsEmpty() == False:
+                tempList.push_back(s.pop())
+            print tempList
+        else:
+            while s.IsEmpty() == False:
+                x = s.pop()
+
+            
+
+
+    #util.raiseNotDefined()
+
+
+def DFS(problem, state):
+    if state == None:
+        return None
+
+    if(problem.isGoalState(state)):
+        #time to unwind
+        path.push_back(state) 
+    else:
+        for x in problem.getSuccessors(state):
+            DFS(problem, x)
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""

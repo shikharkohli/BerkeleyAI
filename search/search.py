@@ -95,7 +95,7 @@ def depthFirstSearch(problem):
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     currentState = problem.getStartState()
     nextState = None
-     
+    ''' 
     s = Stack()
     s.push(currentState)
 
@@ -104,9 +104,6 @@ def depthFirstSearch(problem):
        #TODO - coz i have to do work that pays the bills
        #Add a matrix to check for visited spots
        #Print actions
-        for x in problem.getSuccessors(state):
-            s.push(x)
-            state = x
         
         if problem.IsGoalState(s.top()) == True:
             #time to unwind
@@ -115,22 +112,32 @@ def depthFirstSearch(problem):
                 tempList.push_back(s.pop())
             print tempList
         else:
-            while s.IsEmpty() == False:
-                x = s.pop()
+            for x in problem.getSuccessors(state):
+                s.push(x)
+                state = x
+        
+   
+    '''
 
-            
-
+    DFS(problem, currentState)
 
     #util.raiseNotDefined()
 
+global_var = False
 
 def DFS(problem, state):
-    if state == None:
+    if state == None and global_var == False:
         return None
+
+    if global_var == True:
+       print state
+       return
 
     if(problem.isGoalState(state)):
         #time to unwind
-        path.push_back(state) 
+        global_var = True
+        return
+         
     else:
         for x in problem.getSuccessors(state):
             DFS(problem, x)
